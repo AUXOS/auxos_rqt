@@ -37,13 +37,13 @@ from QtGui import QApplication, QCursor, QFileDialog, QIcon, QMenu, QMessageBox,
 from QtCore import QRegExp, Qt, qWarning
 
 
-class PathFollowingWidget(QWidget):
+class FollowPathWidget(QWidget):
     """
     Primary widget for the rqt_path_following_client plugin.
     """
     def __init__(self):
-        super(PathFollowingWidget, self).__init__()
-        ui_file = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'path_following_widget.ui')
+        super(FollowPathWidget, self).__init__()
+        ui_file = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'rqt_follow_path_widget.ui')
         loadUi(ui_file, self)
         self.setObjectName('PathFollowingWidget')
 

@@ -5,17 +5,17 @@ import rospy
 
 from qt_gui.plugin import Plugin
 #from qt_gui.qt_binding_helper import loadUi
-from .path_following_widget import PathFollowingWidget
+from .rqt_follow_path_widget import FollowPathWidget
 
-class PathFollowingClient(Plugin):
+class FollowPath(Plugin):
 
     def __init__(self, context):
-        super(PathFollowingClient, self).__init__(context)
+        super(FollowPath, self).__init__(context)
         # give QObjects reasonable names
         self.setObjectName('PathFollowingClient')
 
         # create widget object
-        self._widget = PathFollowingWidget()
+        self._widget = FollowPathWidget()
 
         # add widget to the user interface
         context.add_widget(self._widget)

@@ -41,29 +41,24 @@ class PathFollowingWidget(QWidget):
     """
     Primary widget for the rqt_path_following_client plugin.
     """
-    def __init__(self, proxymodel):
-        super(ConsoleWidget, self).__init__()
+    def __init__(self):
+        super(PathFollowingWidget, self).__init__()
         ui_file = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'path_following_widget.ui')
         loadUi(ui_file, self)
         self.setObjectName('PathFollowingWidget')
 
-        # set up callbacks
-        self.path_filename_button.clicked[bool].connect(self._handle_select_path)
-        self.load_button.clicked[bool].connect(self._handle_start_following)
-        self.save_button.clicked[bool].connect(self._handle_stop_following)
+    def _handle_start_following(self):
+        # get path file to load
+        # filename = QFileDialog.getOpenFileName(self, self.tr('Load Path from File'), '.', self.tr('Path File {.txt} (*.txt)'))
+        # if filename[0] != '':
+        #     try:
+        #         handle = open(filename[0])
+        #     except IOError as e:
+        #         qWarning(str(e))
+        #         return
+        # path_filename.setText(filename)
 
-    def _handle_select_path(self, checked):
-        filename = QFileDialog.getOpenFileName(self, self.tr('Load Path from File'), '.', self.tr('Path File {.txt} (*.txt)'))
-        if filename[0] != '':
-            try:
-                handle = open(filename[0])
-            except IOError as e:
-                qWarning(str(e))
-                return
-        path_filename.setText(filename)
+        print("start following")
 
-    def _handle_start_following(self, checked):
-        pass
-
-    def _handle_stop_following(self, checked):
-        pass
+    def _handle_stop_following(self):
+        print("stop following")

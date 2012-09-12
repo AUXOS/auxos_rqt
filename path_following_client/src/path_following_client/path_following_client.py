@@ -4,13 +4,13 @@ roslib.load_manifest('path_following_client')
 import rospy
 
 from qt_gui.plugin import Plugin
-from qt_gui.qt_binding_helper import loadUi
-from QtGui import QWidget
+#from qt_gui.qt_binding_helper import loadUi
+from .path_following_widget import PathFollowingWidget
 
 class PathFollowingClient(Plugin):
 
     def __init__(self, context):
-        super(MyPlugin, self).__init__(context)
+        super(PathFollowingClient, self).__init__(context)
         # give QObjects reasonable names
         self.setObjectName('PathFollowingClient')
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Form</class>
- <widget class="QWidget" name="Form">
+ <class>PathFollowingClient</class>
+ <widget class="QWidget" name="PathFollowingClient">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Path Following Client</string>
   </property>
   <property name="styleSheet">
    <string notr="true"/>
@@ -211,7 +211,7 @@
   <connection>
    <sender>pb_start_following</sender>
    <signal>clicked()</signal>
-   <receiver>Form</receiver>
+   <receiver>PathFollowingClient</receiver>
    <slot>_handle_start_following()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -227,7 +227,7 @@
   <connection>
    <sender>pb_stop_following</sender>
    <signal>clicked()</signal>
-   <receiver>Form</receiver>
+   <receiver>PathFollowingClient</receiver>
    <slot>_handle_stop_following()</slot>
    <hints>
     <hint type="sourcelabel">

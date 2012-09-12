@@ -43,7 +43,7 @@ class FollowPathWidget(QWidget):
     """
     def __init__(self):
         super(FollowPathWidget, self).__init__()
-        ui_file = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'rqt_follow_path_widget.ui')
+        ui_file = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'follow_path_widget.ui')
         loadUi(ui_file, self)
         self.setObjectName('PathFollowingWidget')
 

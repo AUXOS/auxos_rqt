@@ -1,17 +1,9 @@
 <library path="src">
-  <class name="FollowPath" type="rqt_follow_path.rqt_follow_path.FollowPath" base_class_type="rqt_gui_py::Plugin">
+  <class name="FollowPath" type="rqt_follow_path.follow_path.FollowPath" base_class_type="rqt_gui_py::Plugin">
     <description>
       An example Python GUI plugin to create a great user interface.
     </description>
     <qtgui>
-      <!-- optional grouping...
-      <group>
-        <label>Group</group>
-      </group>
-      <group>
-        <label>Subgroup</group>
-      </group>
-      -->
       <label>Dubins Path Following Plugin</label>
       <icon type="theme">system-help</icon>
       <statustip>Great user interface to provide real value.</statustip>

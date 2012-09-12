@@ -1,11 +1,9 @@
-import os
 import roslib
-roslib.load_manifest('path_following_client')
-import rospy
+roslib.load_manifest('rqt_follow_path')
+import qt_gui.qt_binding_helper  # @UnusedImport
 
 from qt_gui.plugin import Plugin
-#from qt_gui.qt_binding_helper import loadUi
-from .rqt_follow_path_widget import FollowPathWidget
+from follow_path_widget import FollowPathWidget
 
 class FollowPath(Plugin):
 

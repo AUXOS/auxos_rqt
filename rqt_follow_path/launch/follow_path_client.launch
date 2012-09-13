@@ -1,0 +1,5 @@
+<launch>
+    <node pkg="rqt_follow_path" type="follow_path_client.py" name="follow_path_client"
+          output="screen" required="true">
+    </node>
+</launch>

@@ -1,5 +1,3 @@
-import roslib
-roslib.load_manifest('rqt_follow_path')
 import qt_gui.qt_binding_helper  # @UnusedImport
 
 from qt_gui.plugin import Plugin
@@ -18,9 +16,12 @@ class FollowPath(Plugin):
         # add widget to the user interface
         context.add_widget(self._widget)
 
+        # set up subscriptions to needed topics
+        self._widget.configure_ros()
+
     def shutdown_plugin(self):
         # TODO unregister all publishers here
-        pass
+        self._widget.shutdown_ros()
 
     def save_settings(self, plugin_settings, instance_settings):
         # TODO save intrinsic configuration, usually using:

@@ -54,7 +54,8 @@ from nav_msgs.msg import Path
 import math
 import csv
 
-
+def psi2theta(psi):
+    return math.pi/2-psi
 
 class FollowPathWidget(QWidget):
     """
@@ -65,10 +66,12 @@ class FollowPathWidget(QWidget):
         ui_file = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'follow_path_widget.ui')
         loadUi(ui_file, self)
         self.setObjectName('PathFollowingWidget')
+
+        self.path_frame_id = rospy.get_param("~path_frame_id", "odom")
     
     def configure_ros(self):
         """ Set up ROS communications"""
-        self._client=actionlib.SimpleActionClient('follow_path_client',auxos_messages.msg.PlanThenFollowDubinsPathAction)
+        self._client=actionlib.SimpleActionClient('PlanThenFollowDubinsPath',auxos_messages.msg.PlanThenFollowDubinsPathAction)
 
     def shutdown_ros(self):
         """ Shutdown ROS communications"""
@@ -94,10 +97,11 @@ class FollowPathWidget(QWidget):
             except IOError as e:
                 qWarning(str(e))
                 return
-        path_filename.setText(filename)
+        #path_filename.setText(filename)
+        print(filename)
 
         # load path from file
-        path_reader=csv.reader(open(filename,'rb'),delimiter=';')
+        path_reader=csv.reader(open(filename[0],'rb'),delimiter=';')
 
         # parse path file and convert to numbers
         temp = [row[0].split() for row in path_reader]
@@ -116,7 +120,7 @@ class FollowPathWidget(QWidget):
         for line in lines:
             pose_msg = PoseStamped()
             pose_msg.header.stamp = now
-            pose_msg.header.frame_id = msg.header.frame_id
+            pose_msg.header.frame_id = goal.path.header.frame_id
             pose_msg.pose.position.x = line[0]
             pose_msg.pose.position.y = line[1]
             quat = qfe(0, 0, psi2theta(line[2]))
@@ -126,7 +130,7 @@ class FollowPathWidget(QWidget):
             pose_msg.pose.orientation.w = quat[3]
             goal.path.poses.append(pose_msg)
 
-        self._client.send_goal(goal, _handle_path_complete, _handle_active, _handle_feedback)
+        self._client.send_goal(goal, self._handle_path_complete, self._handle_active, self._handle_feedback)
 
         print("start following")
 
@@ -137,7 +141,9 @@ class FollowPathWidget(QWidget):
         #update labels with feedback - need to use signals and slots
         print('feedback received')
 
-    def _handle_path_complete(self, goal_status):
+    def _handle_path_complete(self, goal_status, goal_result):
+        print(goal_status)
+        print(goal_result)
         print('path complete')
 
     def _handle_active(self):

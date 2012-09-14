@@ -34,7 +34,7 @@ import os
 
 from qt_gui.qt_binding_helper import loadUi
 from QtGui import QApplication, QCursor, QFileDialog, QIcon, QMenu, QMessageBox, QTableView, QWidget
-from QtCore import QRegExp, Qt, qWarning
+from QtCore import QRegExp, Qt, qWarning, Signal
 
 import roslib
 import rospy
@@ -58,6 +58,9 @@ def psi2theta(psi):
     return math.pi/2-psi
 
 class FollowPathWidget(QWidget):
+    update_status = Signal(auxos_messages.msg._PlanThenFollowDubinsPathFeedback.PlanThenFollowDubinsPathFeedback)
+
+
     """
     Primary widget for the rqt_path_following_client plugin.
     """
@@ -69,6 +72,9 @@ class FollowPathWidget(QWidget):
 
         self.path_frame_id = rospy.get_param("~path_frame_id", "odom")
     
+        self.update_status.connect(self._update_following_status)
+
+
     def configure_ros(self):
         """ Set up ROS communications"""
         self._client=actionlib.SimpleActionClient('/dubins_controller_node/PlanThenFollowDubinsPath',auxos_messages.msg.PlanThenFollowDubinsPathAction)
@@ -138,6 +144,8 @@ class FollowPathWidget(QWidget):
     def _handle_feedback(self, feedback):
         #update labels with feedback - need to use signals and slots
         print('feedback received')
+        print(type(feedback))
+        self.update_status.emit(feedback)
 
     def _handle_path_complete(self, goal_status, goal_result):
         print(goal_status)
@@ -147,3 +155,6 @@ class FollowPathWidget(QWidget):
     def _handle_active(self):
         print('transitioned to active')
 
+    def _update_following_status(self, feedback):
+        print(feedback)
+        self.lbl_segment_index.setText("got it")

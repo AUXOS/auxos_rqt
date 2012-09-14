@@ -71,7 +71,7 @@ class FollowPathWidget(QWidget):
     
     def configure_ros(self):
         """ Set up ROS communications"""
-        self._client=actionlib.SimpleActionClient('PlanThenFollowDubinsPath',auxos_messages.msg.PlanThenFollowDubinsPathAction)
+        self._client=actionlib.SimpleActionClient('/dubins_controller_node/PlanThenFollowDubinsPath',auxos_messages.msg.PlanThenFollowDubinsPathAction)
 
     def shutdown_ros(self):
         """ Shutdown ROS communications"""
@@ -97,8 +97,6 @@ class FollowPathWidget(QWidget):
             except IOError as e:
                 qWarning(str(e))
                 return
-        #path_filename.setText(filename)
-        print(filename)
 
         # load path from file
         path_reader=csv.reader(open(filename[0],'rb'),delimiter=';')

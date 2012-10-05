@@ -139,12 +139,13 @@ class FollowPathWidget(QWidget):
         print("start following")
 
     def _handle_stop_following(self):
+        self._client.cancel_goal();
         print("stop following")
 
     def _handle_feedback(self, feedback):
         #update labels with feedback - need to use signals and slots
-        print('feedback received')
-        print(type(feedback))
+        #print('feedback received')
+        #print(type(feedback))
         self.update_status.emit(feedback)
 
     def _handle_path_complete(self, goal_status, goal_result):
@@ -156,5 +157,5 @@ class FollowPathWidget(QWidget):
         print('transitioned to active')
 
     def _update_following_status(self, feedback):
-        print(feedback)
+        #print(feedback)
         self.lbl_segment_index.setText("got it")

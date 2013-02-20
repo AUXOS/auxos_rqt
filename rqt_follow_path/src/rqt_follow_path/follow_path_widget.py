@@ -32,7 +32,7 @@
 
 import os
 
-from qt_gui.qt_binding_helper import loadUi
+from python_qt_binding import loadUi
 from QtGui import QApplication, QCursor, QFileDialog, QIcon, QMenu, QMessageBox, QTableView, QWidget
 from QtCore import QRegExp, Qt, qWarning, Signal
 

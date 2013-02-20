@@ -9,14 +9,13 @@ import roslib
 roslib.load_manifest('rqt_follow_path')
 import rospy
 
-import qt_gui.qt_binding_helper  # @UnusedImport
-import QtCore, QtGui
+from python_qt_binding import QtGui, QtCore
 from follow_path_widget import FollowPathWidget
 
 def handle_shutdown():
     print('Shutting down ROS node.')
-    global Form
-    Form.shutdown_ros()
+    #global Form
+    #Form.shutdown_ros()
 
 if __name__ == "__main__":
     # start up ROS
@@ -26,7 +25,7 @@ if __name__ == "__main__":
     import sys
     app = QtGui.QApplication(sys.argv)
     print('Loading widget.')
-    global Form
+    #global Form
     Form = FollowPathWidget()
     print('Configuring ROS node')
     Form.configure_ros()

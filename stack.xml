@@ -1,9 +1,0 @@
-<stack>
-  <description brief="AUXOS rqt gui plugins">
-
-  </description>
-  <author>David Hodo</author>
-  <license>BSD</license>
-  <review status="unreviewed" notes=""/>
-  <depend stack="rqt"/>
-</stack>
